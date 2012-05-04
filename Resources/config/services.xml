@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--
+    <parameters>
+        <parameter key="room13_pref.example.class">Room13\PrefBundle\Example</parameter>
+    </parameters>
+     -->
+
+
+    <services>
+
+        <service id="room13.pref.settings" class="Room13\PrefBundle\Settings\SettingManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="session" />
+        </service>
+
+        <service id="room13.pref.twig_extension" class="Room13\PrefBundle\Templating\TwigExtension">
+            <tag name="twig.extension" />
+            <argument type="service" id="room13.pref.settings" />
+        </service>
+    </services>
+
+</container>
