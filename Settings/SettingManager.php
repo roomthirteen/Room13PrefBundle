@@ -2,6 +2,7 @@
 
 namespace Room13\PrefBundle\Settings;
 
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class SettingManager
 {
@@ -15,7 +16,7 @@ class SettingManager
      */
     private $session;
 
-    function __construct(\Doctrine\ORM\EntityManager $em, \Symfony\Component\HttpFoundation\Session $session)
+    function __construct(\Doctrine\ORM\EntityManager $em, Session $session)
     {
         $this->em = $em;
         $this->session = $session;
@@ -26,7 +27,10 @@ class SettingManager
 
         if ($locale === false)
         {
-            $locale = $this->session->getLocale();
+            // TODO: get from request due to sf 2.1changes
+            // @sf21
+            //$locale = $this->session->getLocale();
+            $locale = 'en';
         }
 
         $qb = $this->em->createQueryBuilder();
